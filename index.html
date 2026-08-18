@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mecânica | Socorro Mecânico 24h</title>
+    <!-- Ícones do FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS do Swiper para o Slider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <style>
+        :root {
+            --primary: #ffcc00;
+            --primary-dark: #e6b800;
+            --dark: #121212;
+            --dark-card: #1e1e1e;
+            --text: #ffffff;
+            --text-muted: #b0b0b0;
+            --whatsapp: #25d366;
+            --accent: #ff3b3b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* Header / Topo */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--primary);
+            display: block;
+            font-size: 0.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .header-btn {
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .header-btn:hover {
+            background-color: #1ebe5d;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 5% 80px 5%;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+        }
+
+        .badge-emergency {
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-wpp {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+
+        .btn-call {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-call:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 70px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        /* Cards do Slider */
+        .swiper {
+            width: 100%;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background-color: var(--dark-card);
+            border-radius: 10px;
+            padding: 30px;
+            border-top: 4px solid var(--primary);
+            height: auto;
+        }
+
+        .card details summary {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .card details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .card ul {
+            list-style: none;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--primary);
+        }
+
+        .card li {
+            margin-bottom: 10px;
+        }
+
+        /* Paginação do Swiper */
+        .swiper-pagination-bullet {
+            background: var(--text-muted);
+        }
+        .swiper-pagination-bullet-active {
+            background: var(--primary);
+        }
+
+        /* Avaliações */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background-color: var(--dark-card);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .review-card .stars {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .review-form-box {
+            background-color: var(--dark-card);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 700px;
+            margin: 50px auto 0 auto;
+            border-top: 4px solid var(--whatsapp);
+        }
+
+        .review-form-box h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #121212;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--whatsapp);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #1ebe5d;
+        }
+
+        /* Rodapé */
+        footer {
+            padding: 60px 5% 40px 5%;
+            background-color: #0b0b0b;
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        /* Rodapé de Emergência Fixo para Mobile */
+        .mobile-emergency-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            border-top: 2px solid var(--primary);
+            z-index: 1000;
+            padding: 10px;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        .mobile-btn {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .mobile-btn.wpp { background-color: var(--whatsapp); }
+        .mobile-btn.call { background-color: var(--accent); }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .mobile-emergency-bar {
+                display: flex;
+            }
+            body {
+                padding-bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topo / Header -->
+    <header>
+        <div class="logo">Mecânica <span>Campinas e Região</span></div>
+        
+        <nav class="nav-menu">
+            <a href="#">Início</a>
+            <a href="#avaliacoes">Avaliações</a>
+            <a href="#contatos">Contatos</a>
+        </nav>
+
+        <a href="https://wa.me/554832471134?text=Olá,%20preciso%20de%20socorro%20mecânico%20urgente!" class="header-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+    </header>
+
+    <!-- Seção Principal (Hero) -->
+    <section class="hero">
+        <div class="badge-emergency"><i class="fa-solid fa-triangle-exclamation"></i> Plantão 24 Horas</div>
+        <h1>Socorro Mecânico Rápido!<br><br><span>Carros, Motos e Linha Diesel</span></h1>
+        <p>Ficou na estrada ou o veículo não liga? Atendimento de emergência especializado 24 horas por dia, todos os dias da semana.</p>
+        <div class="cta-buttons">
+            <a href="tel:4832471134" class="btn btn-call"><i class="fa-solid fa-phone-volume"></i> Ligar Agora</a>
+            <a href="https://wa.me/554832471134?text=Olá,%20preciso%20de%20socorro%20mecânico%20urgente!" class="btn btn-wpp" target="_blank"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Especialidades (Slider) -->
+    <section>
+        <div class="section-title">
+            <h2>O Que Nós Atendemos</h2>
+        </div>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                
+                <!-- Slide Diesel -->
+                <div class="swiper-slide card">
+                    <details>
+                        <summary>
+                            <i class="fa-solid fa-truck-pickup"></i>
+                            <h3>Linha Diesel</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Clique para ver detalhes</p>
+                        </summary>
+                        <ul>
+                            <li><strong>CAIXA DE CÂMBIO:</strong> Especialistas em caixas de câmbio manuais e automatizadas, com diagnóstico preciso e reparos de qualidade.</li>
+                            <li><strong>DIFERENCIAL:</strong> Manutenção e reparo completo de diferenciais, garantindo durabilidade e estabilidade para seu veículo.</li>
+                            <li><strong>DIREÇÃO HIDRÁULICA:</strong> Serviço especializado em direção hidráulica, com manutenção preventiva e corretiva para sua segurança.</li>
+                            <li><strong>PARTE ELÉTRICA:</strong> Soluções completas para o sistema elétrico, com diagnóstico eletrônico, reparo de chicotes, sensores e módulos.</li>
+                            <li><strong>EMBREAGENS:</strong> Substituição e manutenção de embreagens, usando peças de procedência para maior durabilidade.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Slide Carros -->
+                <div class="swiper-slide card">
+                    <details>
+                        <summary>
+                            <i class="fa-solid fa-car"></i>
+                            <h3>Carros Leves</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Clique para ver detalhes</p>
+                        </summary>
+                        <ul>
+                            <li><strong>Manutenção Mecânica:</strong> Conte conosco para manutenção corretiva, preventiva e diagnósticos precisos do seu carro. Atendemos modelos multimarcas e premium.</li>
+                            <li><strong>Manutenção Elétrica:</strong> Oferecemos serviços elétricos automotivos dos principais fabricantes.</li>
+                            <li><strong>Estética Automotiva:</strong> Lavagem Premium, Polimento Técnico, Cristalização e Higienização Interna.</li>
+                            <li><strong>Troca de Óleo:</strong> A lubrificação é fundamental para a durabilidade e desempenho do motor.</li>
+                            <li><strong>Freios e Discos:</strong> Realize a manutenção de pastilhas, discos e troca de fluído de freio.</li>
+                            <li>Pane seca, troca de bateria, problemas de motor, superaquecimento e correias em qualquer local.</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Slide Motos -->
+                <div class="swiper-slide card">
+                    <details>
+                        <summary>
+                            <i class="fa-solid fa-motorcycle"></i>
+                            <h3>Motos</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Clique para ver detalhes</p>
+                        </summary>
+                        <ul>
+                            <li>Assistência emergencial para motociclistas. Pane elétrica, corrente, problemas de partida e suporte no trânsito.</li>
+                            <li>Revisão completa.</li>
+                            <li>Troca de pastilhas de freio.</li>
+                            <li>Regulagem de motor.</li>
+                            <li>Troca de corrente e coroa.</li>
+                            <li>Diagnóstico eletrônico e troca de embreagem.</li>
+                        </ul>
+                    </details>
+                </div>
+
+            </div>
+            <!-- Setas de navegação -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+        
+    <!-- Nova Seção: Avaliações e Depoimentos de Clientes -->
+    <section id="avaliacoes">
+        <div class="section-title">
+            <h2>Avaliações dos Clientes</h2>
+            <p>Veja o que dizem sobre o nosso atendimento ou deixe seu comentário</p>
+        </div>
+
+        <!-- Grid de Depoimentos Existentes -->
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px;">"Fiquei com o caminhão parado na rodovia à noite e fui atendido super rápido. Profissionais excelentes e honestos!"</p>
+                <strong style="font-size: 0.9rem; color: var(--text);">— Carlos Eduardo (Linha Diesel)</strong>
+            </div>
+
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px;">"Meu carro teve pane elétrica na cidade e em menos de 30 minutos a equipe chegou para resolver. Nota 10!"</p>
+                <strong style="font-size: 0.9rem; color: var(--text);">— Mariana Souza (Carros Leves)</strong>
+            </div>
+        </div>
+
+        <!-- Formulário para Deixar um Comentário -->
+        <div class="review-form-box">
+            <h3>Deixe seu comentário ou avaliação</h3>
+            <form onsubmit="event.preventDefault(); alert('Obrigado pelo seu feedback!');">
+                <div class="form-group">
+                    <label for="nome">Seu Nome:</label>
+                    <input type="text" id="nome" required placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="veiculo">Veículo / Serviço Utilizado:</label>
+                    <input type="text" id="veiculo" required placeholder="Ex: Caminhão / Socorro Mecânico">
+                </div>
+                <div class="form-group">
+                    <label for="comentario">Sua Mensagem:</label>
+                    <textarea id="comentario" rows="4" required placeholder="Como foi sua experiência com nosso atendimento?"></textarea>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fa-regular fa-paper-plane"></i> Enviar Comentário</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé & Contatos -->
+    <footer id="contatos">
+        <div class="footer-grid">
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Contato</h3>
+                <p style="color: var(--text-muted); margin-bottom: 5px;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> (48) 3247-1134</p>
+                <p style="color: var(--text-muted); margin-bottom: 5px;">
+                    <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> 
+                    <a href="mailto:mecanica.adm@gmail.com" style="color: var(--text-muted); text-decoration: none;">mecanica.adm@gmail.com</a>
+                </p>
+                <p style="color: var(--text-muted); margin-bottom: 5px;">
+                    <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> 
+                    <a href="mailto:mecanicafinanceiro@gmail.com" style="color: var(--text-muted); text-decoration: none;">mecanicafinanceiro@gmail.com</a>
+                </p>
+                <p style="color: var(--text-muted); margin-bottom: 5px;">
+                    <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> 
+                    <a href="mailto:mecanica.comercial@gmail.com" style="color: var(--text-muted); text-decoration: none;">mecanica.comercial@gmail.com</a>
+                </p>
+                <a href="https://wa.me/554832471134?text=Olá,%20preciso%20de%20socorro%20mecânico%20urgente!" style="color: var(--whatsapp); text-decoration: none; display: block; margin-top: 10px;" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+                </a>
+            </div>
+        </div>
+    
+        <div style="text-align: center; margin-top: 40px; color: #444; font-size: 0.8rem; border-top: 1px solid #222; padding-top: 20px;">
+            &copy; 2026 Oficina Mecânica <div><span>Profissionais Certificados</span></div>
+        </div>
+    </footer>
+
+    <!-- Barra de Emergência Fixa (Mobile) -->
+    <div class="mobile-emergency-bar">
+        <a href="tel:4832471134" class="mobile-btn call"><i class="fa-solid fa-phone"></i> Ligar</a>
+        <a href="https://wa.me/554832471134?text=Olá,%20preciso%20de%20socorro%20mecânico%20urgente!" class="mobile-btn wpp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+
+    <!-- Script do Swiper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+    </script>
+</body>
+</html>
